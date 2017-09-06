@@ -34,4 +34,8 @@ if [[ -n ${OTS_NAME+x} ]]; then
 fi
 
 redis-server /etc/onetime/redis.conf
-cd /var/lib/onetime && bundle exec thin -e dev -R config.ru -p 7143 start
+cd /var/lib/onetime
+while [ 1 ]; do # sometimes takes a sec before redis is ready
+  sleep 1
+  bundle exec thin -e dev -R config.ru -p 7143 start
+done
