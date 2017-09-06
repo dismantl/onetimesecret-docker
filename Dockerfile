@@ -55,7 +55,9 @@ RUN DEBIAN_FRONTEND=noninteractive \
     ruby \
     ruby-dev \
     ruby-bundler \
-    redis-server
+    redis-server \
+    curl \
+    build-essential
 
 # OTS pre-installation
 RUN set -ex && \
