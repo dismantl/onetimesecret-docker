@@ -1,6 +1,6 @@
 :site:
-  :host: example.com:7143
-  :domain: example.com
+  :host: localhost:7143
+  :domain: localhost
   :ssl: false
   # NOTE Once the secret is set, do not change it (keep a backup offsite)
   :secret: CHANGEME

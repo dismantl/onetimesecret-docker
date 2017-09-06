@@ -3,7 +3,7 @@
 
 pidfile /var/run/onetime/redis.pid
 logfile /var/log/onetime/redis.log
-dir /var/lib/onetime/
+dir /var/lib/onetime/redis/
 dbfilename default.rdb
 appendfilename default.aof
 
