@@ -5,7 +5,7 @@ services:
     image: 'dismantl/onetimesecret'
     restart: always
     ports:
-      - '7193:7193'
+      - '7143:7143'
     volumes:
       - './config:/etc/onetime/config'
       - './redis.conf:/etc/onetime/redis.conf'
