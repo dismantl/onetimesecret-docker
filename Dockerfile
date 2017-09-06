@@ -23,8 +23,8 @@ RUN set -ex && \
   useradd -U -s /bin/false ots && \
 
   # Create directories
-  mkdir -p /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime && \
-  chown ots /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime
+  mkdir -p /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime /var/lib/onetime/redis && \
+  chown ots /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime /var/lib/onetime/redis
 
 USER ots
 
