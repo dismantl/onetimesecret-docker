@@ -21,7 +21,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 RUN set -ex && \
   # Add ots user
   useradd -U -s /bin/false ots && \
-
+  \
   # Create directories
   mkdir -p /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime /var/lib/onetime/redis && \
   chown ots /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime /var/lib/onetime/redis
