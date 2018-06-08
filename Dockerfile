@@ -37,7 +37,12 @@ RUN set -ex && \
   bundle install --frozen --deployment --without=dev --gemfile /var/lib/onetime/Gemfile && \
   cp -R etc/* /etc/onetime/
 
-ADD entrypoint.sh /usr/bin/
+# Copy our own config files over the config files that OTS put in there
+# By default, these are owned by root, but we tell Docker to have the ots user own them instead
+COPY --chown=ots:ots config.example /etc/onetime/config
+COPY --chown=ots:ots redis.conf.example /etc/onetime/redis.conf
+
+COPY entrypoint.sh /usr/bin/
 
 VOLUME /etc/onetime /var/lib/onetime/redis
 
