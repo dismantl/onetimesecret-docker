@@ -30,7 +30,11 @@ USER ots
 
 # Download and install latest OTS
 RUN set -ex && \
-  curl https://codeload.github.com/onetimesecret/onetimesecret/legacy.tar.gz/master -o /tmp/ots.tar.gz && \
+  # Get the latest commit we are aware of (previously this grabbed master, which is a moving target)
+  # I don't get the latest official "release" (2016-11-14 at the time of this writing) because that actually 
+  # had some errors installing/compiling eventmachine
+  # -L tells curl to follow redirects
+  curl -L https://github.com/onetimesecret/onetimesecret/archive/8ba0511e74b64280003691251dd99b04915d42ea.tar.gz -o /tmp/ots.tar.gz && \
   tar xzf /tmp/ots.tar.gz -C /var/lib/onetime --strip-components=1 && \
   rm /tmp/ots.tar.gz && \
   cd /var/lib/onetime && \
