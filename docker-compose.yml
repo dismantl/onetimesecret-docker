@@ -1,9 +1,16 @@
-version: '2'
+version: '3'
+
+#============================================#
+# Docker compose network config
+#============================================#
+networks:
+  ots-redis:
+
 services:
+
   onetimesecret:
     container_name: ots
-    # image: 'dismantl/onetimesecret'
-    build: .
+    image: 'binbash/onetimesecret'
     restart: always
     ports:
       - '7143:7143'
@@ -11,4 +18,19 @@ services:
       - './config:/etc/onetime/config'
       - './redis:/var/run/redis'
     environment:
-      - OTS_NAME=John Doe
+      - OTS_NAME=user
+    depends_on:
+      - redis
+    links:
+      - redis
+    networks:
+      - ots-redis
+
+  redis:
+    command: redis-server --appendonly yes
+    container_name: redis
+    image: redis:latest
+    expose:
+      - '7179'
+    networks:
+      - ots-redis

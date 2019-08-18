@@ -3,10 +3,11 @@
   :domain: localhost
   :ssl: false
   # NOTE Once the secret is set, do not change it (keep a backup offsite)
-  :secret: CHANGEME
+  :secret: a762ae5a6ed1ff62e04969c4f1cd333387da176c
 :redis:
-  :uri: 'redis://127.0.0.1:6379/0?timeout=10&thread_safe=false&logging=false'
-  :config: /etc/redis/redis.conf
+  #:uri: 'redis://user:fbeaed7d0e14dabdd6d84d8cef76225a720bb9f7@172.19.0.2:7179/0?timeout=10&thread_safe=false&logging=false'
+  :uri: 'redis://fbeaed7d0e14dabdd6d84d8cef76225a720bb9f7@redis:6379/0?timeout=10&thread_safe=false&logging=false'
+  :config: /etc/onetime/redis.conf
 :colonels:
   # Accounts created with the following email addresses
   # are automatically considered admins of the system.
