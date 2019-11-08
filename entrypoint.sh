@@ -21,7 +21,7 @@ if grep -q "redis://user:CHANGEME@127.0.0.1:7179" /etc/onetime/config && \
   echo "Generating Redis password: $PASS"
   cp /etc/onetime/config{,.bak}
   cp /etc/onetime/redis.conf{,.bak}
-  sed "s/requirepass.*\$/requirepass $PASS/" /etc/onetime/redis.conf.bak > /etc/onetime/redis.conf
+  sed "s/.*requirepass.*\$/requirepass $PASS/" /etc/onetime/redis.conf.bak > /etc/onetime/redis.conf
   sed "s/redis:\/\/user:CHANGEME/redis:\/\/user:$PASS/" /etc/onetime/config.bak > /etc/onetime/config
 fi
 
@@ -29,9 +29,9 @@ fi
 # (even better, create and mount your own email templates at the locations below)
 if [[ -n ${OTS_NAME+x} ]]; then
   echo "Setting email sender name to $OTS_NAME"
-  sed -i.bak "s/Delano/$OTS_NAME/" /var/lib/onetime/templates/email/password_request.mustache
-  sed -i.bak "s/Delano/$OTS_NAME/" /var/lib/onetime/templates/email/welcome.mustache
+  sed -i.bak "s/Delano/$OTS_NAME/" /home/ots/templates/email/password_request.mustache
+  sed -i.bak "s/Delano/$OTS_NAME/" /home/ots/templates/email/welcome.mustache
 fi
 
 redis-server /etc/onetime/redis.conf
-cd /var/lib/onetime && bundle exec thin -e dev -R config.ru -p 7143 start
+cd /home/ots && bundle exec thin -e dev -R config.ru -p 7143 start

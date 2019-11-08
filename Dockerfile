@@ -1,7 +1,7 @@
 # Dockerfile for One-Time Secret
 # http://onetimesecret.com
 
-FROM debian:stretch
+FROM ruby:2.3
 
 MAINTAINER Dan Staples <dan@disman.tl>
 
@@ -9,32 +9,28 @@ MAINTAINER Dan Staples <dan@disman.tl>
 RUN DEBIAN_FRONTEND=noninteractive \
   apt-get update && \
   apt-get install -y \
-    ruby \
-    ruby-dev \
-    ruby-bundler \
-    redis-server \
-    curl \
     build-essential \
+    redis-server \
   && rm -rf /var/lib/apt/lists/*
 
 # OTS pre-installation
 RUN set -ex && \
   # Add ots user
-  useradd -U -s /bin/false ots && \
+  useradd -U -m -s /bin/false ots && \
   \
   # Create directories
-  mkdir -p /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime /var/lib/onetime/redis && \
-  chown ots /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime /var/lib/onetime/redis
+  mkdir -p /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime && \
+  chown ots /etc/onetime /var/log/onetime /var/run/onetime /var/lib/onetime
 
 USER ots
 
-# Download and install latest OTS
+# Download and install OTS version 0.10.x
 RUN set -ex && \
-  curl https://codeload.github.com/onetimesecret/onetimesecret/legacy.tar.gz/master -o /tmp/ots.tar.gz && \
-  tar xzf /tmp/ots.tar.gz -C /var/lib/onetime --strip-components=1 && \
+  wget https://codeload.github.com/onetimesecret/onetimesecret/legacy.tar.gz/0.10 -O /tmp/ots.tar.gz && \
+  tar xzf /tmp/ots.tar.gz -C /home/ots --strip-components=1 && \
   rm /tmp/ots.tar.gz && \
-  cd /var/lib/onetime && \
-  bundle install --frozen --deployment --without=dev --gemfile /var/lib/onetime/Gemfile && \
+  cd /home/ots && \
+  bundle install --frozen --deployment --without=dev && \
   cp -R etc/* /etc/onetime/
 
 ADD entrypoint.sh /usr/bin/

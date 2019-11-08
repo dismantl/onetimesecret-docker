@@ -2,7 +2,8 @@ version: '2'
 services:
   onetimesecret:
     container_name: ots
-    image: 'dismantl/onetimesecret'
+    # image: 'dismantl/onetimesecret'
+    build: .
     restart: always
     ports:
       - '7143:7143'
