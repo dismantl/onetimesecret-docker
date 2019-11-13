@@ -9,7 +9,6 @@ services:
       - '7143:7143'
     volumes:
       - './config:/etc/onetime/config'
-      - './redis.conf:/etc/onetime/redis.conf'
-      - './redis:/var/lib/onetime/redis'
+      - './redis:/var/run/redis'
     environment:
       - OTS_NAME=John Doe
