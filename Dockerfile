@@ -1,7 +1,7 @@
 # Dockerfile for One-Time Secret
 # http://onetimesecret.com
 
-FROM ruby:2.3
+FROM ruby:2.6
 
 # Install dependencies
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -19,6 +19,7 @@ RUN set -ex && \
   mv -fv /tmp/onetimesecret-master/* /var/lib/onetime/ && \
   rm -fr /tmp/ots.zip /tmp/onetimesecret-master && \
   cd /var/lib/onetime && \
+  bundle update --bundler && \
   bundle install --frozen --deployment --without=dev && \
   cp -R etc/* /etc/onetime/
 
