@@ -19,6 +19,8 @@ init-makefiles: ## initialize makefiles
 	mkdir -p ${MAKEFILES_DIR}
 	git clone https://github.com/binbashar/le-dev-makefiles.git ${MAKEFILES_DIR}
 
+-include ${MAKEFILES_DIR}/circleci/circleci.mk
+-include ${MAKEFILES_DIR}/release-mgmt/release.mk
 -include ${MAKEFILES_DIR}/docker/docker-hub-build-push.mk
 
 up:
