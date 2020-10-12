@@ -124,3 +124,15 @@ This image is not built with strong security requirements. The image downloads a
 
 ## Licensing
 Inspired by the courage of open source leaders like [Coraline Ada Ehmke](https://www.wired.com/story/open-source-license-requires-users-do-no-harm/) and [Seth Vargo](https://www.wired.com/story/software-company-chef-wont-renew-ice-contact/), this software is licensed under the [Hippocratic License](https://firstdonoharm.dev/). Any organizations or companies that act as or cooperate with law enforcement (such as police departments and ICE) are specifically forbidden from using this software.
+
+---
+
+# Release Management
+### CircleCi PR auto-release job
+<div align="left">
+  <img src="https://raw.githubusercontent.com/binbashar/onetimesecret-docker/master/%40doc/figures/circleci.png" alt="leverage-circleci" width="130"/>
+</div>
+
+- [**pipeline-job**](https://app.circleci.com/pipelines/github/binbashar/onetimesecret-docker) (**NOTE:** Will only run after merged PR)
+- [**releases**](https://github.com/binbashar/onetimesecret-docker/releases) 
+- [**changelog**](https://github.com/binbashar/onetimesecret-docker/blob/master/CHANGELOG.md) 
