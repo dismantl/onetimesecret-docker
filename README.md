@@ -16,17 +16,43 @@ You'll then be able to visit your instance of OTS by visiting http://localhost:7
 The best way to run a customized instance of onetimesecret-docker is using docker-compose with the provided `docker-compose.yml`:
 
 ```
-version: '2'
+version: '3.7'
+
+#============================================#
+# Docker compose network config
+#============================================#
+networks:
+  ots-redis:
+
 services:
+
   onetimesecret:
     container_name: ots
-    image: 'dismantl/onetimesecret'
+    build: .
+    restart: always
     ports:
       - '7143:7143'
     volumes:
-      - './config:/etc/onetime/config'
+      - './ots.conf:/etc/onetime/config'
+      - './redis.conf:/etc/onetime/redis.conf'
+      - './redis:/var/lib/onetime/redis'
     environment:
-      - OTS_NAME=John Doe
+      - OTS_NAME=user
+    depends_on:
+      - redis
+    links:
+      - redis
+    networks:
+      - ots-redis
+
+  redis:
+    command: redis-server --appendonly yes
+    container_name: redis
+    image: redis:latest
+    expose:
+      - '7179'
+    networks:
+      - ots-redis
 ```
 
 Here you can customize the name used in the email templates using the `OTS_NAME` environment variable. For additional customization, provide your own version of [any of the web or email templates](https://github.com/onetimesecret/onetimesecret/tree/master/templates) and include them as [mounted volumes](https://docs.docker.com/storage/volumes/) in the `docker-compose.yml` file.
@@ -42,30 +68,55 @@ If you would like to host a long-running instance of onetimesecret-docker or mig
   :domain: localhost
   :ssl: false
   # NOTE Once the secret is set, do not change it (keep a backup offsite)
-  :secret: f8e1c604d5cf6ff9281d8814ab01ea7385f1364a
+  :secret: a762ae5a6ed1ff62e04969c4f1cd333387da176c
 :redis:
-  :uri: 'redis://@127.0.0.1:6379/0?timeout=10&thread_safe=false&logging=false'
-  :config: /etc/redis/redis.conf
+  #:uri: 'redis://user:fbeaed7d0e14dabdd6d84d8cef76225a720bb9f7@172.19.0.2:7179/0?timeout=10&thread_safe=false&logging=false'
+  :uri: 'redis://fbeaed7d0e14dabdd6d84d8cef76225a720bb9f7@redis:6379/0?timeout=10&thread_safe=false&logging=false'
+  :config: /etc/onetime/redis.conf
 ...
 ```
 
 You can then provide this secret to the image by supplying it as the `OTS_SECRET` environment variable. The following `docker-compose.yml` demonstrates providing an OTS secret and a persistent Redis data directory:
 
 ```
-version: '2'
+version: '3.7'
+
+#============================================#
+# Docker compose network config
+#============================================#
+networks:
+  ots-redis:
+
 services:
+
   onetimesecret:
     container_name: ots
-    image: 'dismantl/onetimesecret'
+    build: .
     restart: always
     ports:
       - '7143:7143'
     volumes:
-      - './config:/etc/onetime/config'
-      - './redis:/var/run/redis'
+      - './ots.conf:/etc/onetime/config'
+      - './redis.conf:/etc/onetime/redis.conf'
+      - './redis:/var/lib/onetime/redis'
     environment:
-      - OTS_NAME=John Doe
+      - OTS_NAME=user
       - OTS_SECRET=f8e1c604d5cf6ff9281d8814ab01ea7385f1364a
+    depends_on:
+      - redis
+    links:
+      - redis
+    networks:
+      - ots-redis
+
+  redis:
+    command: redis-server --appendonly yes
+    container_name: redis
+    image: redis:latest
+    expose:
+      - '7179'
+    networks:
+      - ots-redis
 ```
 
 ## Security

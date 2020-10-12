@@ -3,7 +3,7 @@ SHELL         := /bin/bash
 MAKEFILE_PATH := ./Makefile
 MAKEFILES_DIR := ./@bin/makefiles
 
-DOCKER_TAG       := 0.0.2
+DOCKER_TAG       := 0.0.3
 DOCKER_REPO_NAME := binbash
 DOCKER_IMG_NAME  := onetimesecret
 
@@ -22,6 +22,9 @@ init-makefiles: ## initialize makefiles
 -include ${MAKEFILES_DIR}/docker/docker-hub-build-push.mk
 
 up:
+	mkdir -p ./redis
+	cp ots.conf.example ots.conf
+	cp redis.conf.example redis.conf
 	docker-compose up -d
 
 ps:
@@ -29,6 +32,7 @@ ps:
 
 down:
 	docker-compose down
+	rm -rf redis ots.conf redis.conf
 
 test: ## ci docker image tests
 	mkdir -p ./redis

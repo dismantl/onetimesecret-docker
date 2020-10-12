@@ -9,6 +9,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
   apt-get install -y \
     build-essential \
     redis-server \
+    curl \
   && rm -rf /var/lib/apt/lists/*
 
 # Download and install OTS version 0.10.x
@@ -24,7 +25,7 @@ RUN set -ex && \
 ADD entrypoint.sh /usr/bin/
 
 # Add default config
-ADD config.example /etc/onetime/config
+ADD ots.conf.example /etc/onetime/config
 
 VOLUME /etc/onetime /var/run/redis
 

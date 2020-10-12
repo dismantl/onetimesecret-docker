@@ -10,7 +10,7 @@ services:
 
   onetimesecret:
     container_name: ots
-    image: 'binbash/onetimesecret'
+    build: .
     restart: always
     ports:
       - '7143:7143'
