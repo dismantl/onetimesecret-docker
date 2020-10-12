@@ -1,3 +1,31 @@
+# Hidden files #
+################
+.*
+#
+# Except
+#
+!*.env.example
+!*.circleci
+!*.dockeringnore
+!*.hosts
+!.hosts.example
+!*.gitignore
+!/.chglog
+!/.gitallowed
+!/.github
+!*.gitkeep
+!*.editorconfig
+
+# SSH keys #
+############
+id_rsa
+id_dsa
+keys/
+
+# Project specific files #
+#################################
+/@bin
 config
+ots.conf
 redis.conf
 redis
