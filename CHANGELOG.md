@@ -7,8 +7,20 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v0.0.4"></a>
+## [v0.0.4] - 2020-11-15
+
+- Merge branch 'master' of github.com:binbashar/onetimesecret-docker
+- BBL-440 | upgrading repo to use versioned makefile lib
+
+
 <a name="v0.0.1"></a>
-## v0.0.1 - 2020-10-12
+## [v0.0.1] - 2020-10-12
+
+
+
+<a name="v0.0.3"></a>
+## v0.0.3 - 2020-10-12
 
 - BBL-313 | removing unnessary figures
 - BBL-313 | adding figures
@@ -32,4 +44,6 @@ All notable changes to this project will be documented in this file.
 - initial commit
 
 
-[Unreleased]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.4...HEAD
+[v0.0.4]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.1...v0.0.4
+[v0.0.1]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.3...v0.0.1
