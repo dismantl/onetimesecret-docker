@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v0.0.5"></a>
+## [v0.0.5] - 2020-11-16
+
+- BBL-444 | slack notif + makefiles-lib pointed to latest ver
+
+
 <a name="v0.0.4"></a>
 ## [v0.0.4] - 2020-11-15
 
@@ -44,6 +50,7 @@ All notable changes to this project will be documented in this file.
 - initial commit
 
 
-[Unreleased]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.4...HEAD
+[Unreleased]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.5...HEAD
+[v0.0.5]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.4...v0.0.5
 [v0.0.4]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.1...v0.0.4
 [v0.0.1]: https://github.com/binbashar/onetimesecret-docker/compare/v0.0.3...v0.0.1
