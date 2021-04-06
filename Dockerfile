@@ -1,7 +1,7 @@
 # Dockerfile for One-Time Secret
 # http://onetimesecret.com
 
-FROM ruby:2.6.6
+FROM ruby:2.3
 
 # Install dependencies
 RUN DEBIAN_FRONTEND=noninteractive \
